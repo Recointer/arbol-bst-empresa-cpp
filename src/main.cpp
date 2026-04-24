@@ -24,31 +24,70 @@ struct Nodo {
 
 class ArbolBST {
 private:
-    Nodo* raiz;
+   void mostrarEmpleado(Nodo* nodo) {
+        cout << "Codigo: " << nodo->dato.codigo
+             << " | Nombre: " << nodo->dato.nombre
+             << " | Cargo: " << nodo->dato.cargo << endl;
+    }
 
-    // Lógica privada de inserción
-    Nodo* insertar(Nodo* nodo, Empleado emp) {
-        if (nodo == nullptr) {
-            return new Nodo(emp);
+    Nodo* buscar(Nodo* nodo, int codigo) {
+        if (nodo == nullptr || nodo->dato.codigo == codigo) {
+            return nodo;
         }
-        if (emp.codigo < nodo->dato.codigo) {
-            nodo->izquierdo = insertar(nodo->izquierdo, emp);
-        } else if (emp.codigo > nodo->dato.codigo) {
-            nodo->derecho = insertar(nodo->derecho, emp);
+        if (codigo < nodo->dato.codigo) {
+            return buscar(nodo->izquierdo, codigo);
         } else {
-            cout << "El codigo ya existe.\n";
+            return buscar(nodo->derecho, codigo);
         }
-        return nodo;
     }
 
+    void inorden(Nodo* nodo) {
+        if (nodo != nullptr) {
+            inorden(nodo->izquierdo);
+            mostrarEmpleado(nodo);
+            inorden(nodo->derecho);
+        }
+    }
+
+    void preorden(Nodo* nodo) {
+        if (nodo != nullptr) {
+            mostrarEmpleado(nodo);
+            preorden(nodo->izquierdo);
+            preorden(nodo->derecho);
+        }
+    }
+
+    void postorden(Nodo* nodo) {
+        if (nodo != nullptr) {
+            postorden(nodo->izquierdo);
+            postorden(nodo->derecho);
+            mostrarEmpleado(nodo);
+        }
+    }
 public:
-    ArbolBST() {
-        raiz = nullptr;
+    void buscarEmpleado(int codigo) {
+        Nodo* resultado = buscar(raiz, codigo);
+        if (resultado != nullptr) {
+            cout << "\nEmpleado encontrado:\n";
+            mostrarEmpleado(resultado);
+        } else {
+            cout << "\nEmpleado no encontrado.\n";
+        }
     }
 
-    // Método público para insertar
-    void insertarEmpleado(Empleado emp) {
-        raiz = insertar(raiz, emp);
+    void mostrarInorden() {
+        cout << "\nRecorrido Inorden:\n";
+        inorden(raiz);
+    }
+
+    void mostrarPreorden() {
+        cout << "\nRecorrido Preorden:\n";
+        preorden(raiz);
+    }
+
+    void mostrarPostorden() {
+        cout << "\nRecorrido Postorden:\n";
+        postorden(raiz);
     }
 };
 
@@ -73,6 +112,21 @@ int main() {
             cout << "Cargo: ";
             getline(cin, emp.cargo);
             arbol.insertarEmpleado(emp);
+        } 
+        else if (opcion == 2) {
+            int codigo;
+            cout << "Ingrese codigo a buscar: ";
+            cin >> codigo;
+            arbol.buscarEmpleado(codigo);
+        }
+        else if (opcion == 4) {
+            arbol.mostrarInorden();
+        }
+        else if (opcion == 5) {
+            arbol.mostrarPreorden();
+        }
+        else if (opcion == 6) {
+            arbol.mostrarPostorden();
         }
     } while (opcion != 0);
 
