@@ -43,11 +43,3 @@ Para cumplir con los requisitos de la guía, se definen los siguientes conceptos
 
 ## Conclusión
 El Árbol Binario de Búsqueda facilita la organización jerárquica y optimiza los tiempos de búsqueda en comparación con estructuras lineales, siendo ideal para organigramas empresariales.
-![Recorrido 3](capturas/recorridos3.png)
-
-### 4. Altura y Nodos Hoja
-![Altura](capturas/Mostrar_altura.png)
-![Hojas](capturas/Mostrar_Hojas.png)
-
-## Conclusión
-El Árbol Binario de Búsqueda facilita la organización jerárquica y optimiza los tiempos de búsqueda en comparación con estructuras lineales, siendo ideal para organigramas empresariales.
